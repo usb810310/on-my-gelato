@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On My Gelato - 義式冰淇淋專賣店</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        .brand-info h1 {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        .brand-info p {
+            font-size: 0.75rem;
+            color: #666666;
+        }
+
+        nav {
+            display: none;
+            gap: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                display: flex;
+            }
+        }
+
+        nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #d4a574;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            padding: 4rem 0 7rem;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-label {
+            color: #d4a574;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #666666;
+            margin-bottom: 2.5rem;
+            max-width: 40rem;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #1a1a1a;
+            border: 1px solid #1a1a1a;
+        }
+
+        .btn-outline:hover {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Flavors Section */
+        .flavors-section {
+            padding: 4rem 0;
+            background-color: #ffffff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            color: #d4a574;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            .section-header h3 {
+                font-size: 1.875rem;
+            }
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 2rem;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .category-btn:hover {
+            border-color: #d4a574;
+            color: #d4a574;
+        }
+
+        .category-btn.active {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            border-color: #1a1a1a;
+        }
+
+        /* Flavors Grid */
+        .flavors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .flavor-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 0.65rem;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .flavor-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .flavor-color {
+            height: 8rem;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .flavor-card:hover .flavor-color {
+            transform: scale(1.05);
+        }
+
+        .flavor-content {
+            padding: 1.5rem;
+        }
+
+        .flavor-category {
+            font-size: 0.75rem;
+            color: #d4a574;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .flavor-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 0.25rem;
+        }
+
+        .flavor-highlight {
+            font-size: 0.75rem;
+            color: #999999;
+            font-style: italic;
+            margin-bottom: 0.75rem;
+        }
+
+        .flavor-description {
+            font-size: 0.875rem;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            padding: 4rem 0;
+            background-color: #f5f5f5;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        .philosophy-card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.65rem;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s;
+        }
+
+        .philosophy-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .philosophy-icon {
+            width: 2rem;
+            height: 2rem;
+            color: #d4a574;
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .philosophy-subtitle {
+            font-size: 0.875rem;
+            color: #d4a574;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .philosophy-description {
+            font-size: 0.875rem;
+            color: #666666;
+            line-height: 1.7;
+        }
+
+        /* Location Section */
+        .location-section {
+            padding: 4rem 0;
+            background-color: #ffffff;
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .location-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .info-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 0.65rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .info-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #d4a574;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+
+        .info-content h4 {
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-content p {
+            font-size: 0.875rem;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .info-content a {
+            color: #d4a574;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-content a:hover {
+            color: #1a1a1a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            background-color: rgba(212, 165, 116, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .social-link:hover {
+            background-color: rgba(212, 165, 116, 0.2);
+        }
+
+        .social-link svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #d4a574;
+        }
+
+        .map-container {
+            border-radius: 0.65rem;
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            height: 24rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 4rem 0;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 40rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-cta-outline {
+            background-color: #ffffff;
+            color: #1a1a1a;
+            border: none;
+        }
+
+        .btn-cta-outline:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn-cta-accent {
+            background-color: #d4a574;
+            color: #1a1a1a;
+            border: none;
+        }
+
+        .btn-cta-accent:hover {
+            background-color: #c49560;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .footer-section p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #ffffff;
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">OMG</div>
+                    <div class="brand-info">
+                        <h1>On My Gelato</h1>
+                        <p>義式冰淇淋專賣店</p>
+                    </div>
+                </div>
+                <nav>
+                    <a href="#flavors">精選口味</a>
+                    <a href="#philosophy">品牌理念</a>
+                    <a href="#location">店家資訊</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-label">精選 12 味</p>
+                <h2>純粹與層次<br>的對話</h2>
+                <p>每一口 Gelato 都是食材與工藝的完美結合。我們不追求甜度，而是追求風味的純粹與質地的絲滑。</p>
+                <button class="btn btn-primary" onclick="document.getElementById('flavors').scrollIntoView({behavior: 'smooth'})">探索口味</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flavors Section -->
+    <section id="flavors" class="flavors-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">精選 12 味</p>
+                <h3>冰淇淋的故事</h3>
+            </div>
+
+            <div class="category-filter">
+                <button class="category-btn active" onclick="filterFlavors('all')">全部口味</button>
+                <button class="category-btn" onclick="filterFlavors('職人慢磨系列')">職人慢磨系列</button>
+                <button class="category-btn" onclick="filterFlavors('世界經典巡禮')">世界經典巡禮</button>
+                <button class="category-btn" onclick="filterFlavors('茶與咖啡的優雅')">茶與咖啡的優雅</button>
+                <button class="category-btn" onclick="filterFlavors('季節酸甜之旅')">季節酸甜之旅</button>
+            </div>
+
+            <div class="flavors-grid" id="flavorsGrid"></div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="philosophy-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">我們的堅持</p>
+                <h3>清爽的三大承諾</h3>
+            </div>
+
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <svg class="philosophy-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                    </svg>
+                    <h4 class="philosophy-title">真實的風味</h4>
+                    <p class="philosophy-subtitle">Authentic Flavor</p>
+                    <p class="philosophy-description">不使用人工香料與色素，我們花費大量時間處理食材，從手炒芝麻到慢火燜煮紅豆。您所品嚐到皆是食材原有的天然清甜。</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <svg class="philosophy-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <h4 class="philosophy-title">恰到好處的甘甜</h4>
+                    <p class="philosophy-subtitle">Balanced Sweetness</p>
+                    <p class="philosophy-description">我們精確調控糖分的比例，並非為了甜度，而是為了襯托風味與維持絲滑質地。這份平衡讓口感輕盈、尾韻乾淨是我們對清爽的最終追求。</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <svg class="philosophy-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                    </svg>
+                    <h4 class="philosophy-title">專注於絲滑</h4>
+                    <p class="philosophy-subtitle">Focus on Texture</p>
+                    <p class="philosophy-description">義式 Gelato 的靈魂在於細緻的化口性。為了讓您能心無旁鶩地感受這份綿密層次，我們誠摯推薦杯裝品嚐，避免多餘的干擾，將焦點留在味蕾最純粹的觸感。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">拜訪我們</p>
+                <h3>店家資訊</h3>
+            </div>
+
+            <div class="location-content">
+                <div>
+                    <div class="info-card">
+                        <svg class="info-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                        <div class="info-content">
+                            <h4>地址</h4>
+                            <p>宜蘭縣羅東鎮大新里和平路79號</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <svg class="info-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 5V1h-1v4H8.98v2h3.01v3.999H16v2h-4.01V19h-1v-5.001H8.98v-2h3.01V7h3.01V5z"/>
+                        </svg>
+                        <div class="info-content">
+                            <h4>營業時間</h4>
+                            <p>13:00 - 21:00<br><small>（營業時間以現場為準）</small></p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <svg class="info-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46C10.21 5.23 11.08 5 12 5c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3 0 1.13-.64 2.11-1.56 2.62l.98 1.48C23.48 17.32 24 15.97 24 14.5c0-2.64-2.05-4.78-4.65-4.96zM3 5.5C3 4.12 4.12 3 5.5 3S8 4.12 8 5.5V11h2V5.5C10 3.01 8.99 1 5.5 1S1 3.01 1 5.5V11h2zm6 10c0 .55-.45 1-1 1s-1-.45-1-1v-3h-2v3c0 1.66 1.34 3 3 3s3-1.34 3-3v-3H9v3z"/>
+                        </svg>
+                        <div class="info-content">
+                            <h4>官方網站</h4>
+                            <p><a href="https://omg-onmygelato.notion.site" target="_blank">omg-onmygelato.notion.site</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <svg class="info-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-2.16-2.66c-.44-.53-1.25-.58-1.78-.15-.53.44-.58 1.25-.15 1.78l3 3.67c.25.31.61.5 1.02.5s.77-.19 1.02-.5l4-5.15c.44-.53.39-1.34-.15-1.78-.53-.44-1.34-.39-1.78.15z"/>
+                        </svg>
+                        <div class="info-content">
+                            <h4>追蹤我們</h4>
+                            <div class="social-links">
+                                <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">
+                                    <svg fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.645.069-4.849.069-3.204 0-3.584-.012-4.849-.069-3.259-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://facebook.com" target="_blank" class="social-link" title="Facebook">
+                                    <svg fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.9999999999995!2d121.7677!3d24.6766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3467e7f21e2647c3%3A0xcaadc8d77246115!2sOMG!%20On%20My%20Gelato%20%E7%BE%A9%E5%BC%8F%E5%86%B0%E6%B7%87%E6%B7%8B!5e0!3m2!1szh-TW!2stw!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h3>品嚐純粹的滋味</h3>
+            <p>每一口都是食材的故事，每一次品嚐都是對工藝的致敬。</p>
+            <div class="cta-buttons">
+                <a href="https://omg-onmygelato.notion.site" target="_blank" class="btn btn-cta-outline">瀏覽更多</a>
+                <button class="btn btn-cta-accent" onclick="alert('聯絡表單開發中')">聯絡我們</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>On My Gelato</h4>
+                    <p>義式冰淇淋專賣店。精選 12 味，每一口都是純粹與層次的對話。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>聯絡方式</h4>
+                    <p>地址：宜蘭縣羅東鎮大新里和平路79號<br>營業時間：13:00 - 21:00</p>
+                </div>
+                <div class="footer-section">
+                    <h4>追蹤我們</h4>
+                    <p>
+                        <a href="https://instagram.com" target="_blank">Instagram</a><br>
+                        <a href="https://facebook.com" target="_blank">Facebook</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-divider">
+                <p>© 2026 On My Gelato. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 冰淇淋數據
+        const flavors = [
+            {
+                id: 1,
+                name: "黑金芝麻",
+                category: "職人慢磨系列",
+                highlight: "每日限量手工製作",
+                description: "自家手炒、石磨成醬。保留最原始的濃郁油脂香，苦甜適中。",
+                color: "#2a2a2a"
+            },
+            {
+                id: 2,
+                name: "手作紅豆牛奶",
+                category: "職人慢磨系列",
+                highlight: "每日限量手工製作",
+                description: "選用萬丹紅豆高壓燜煮，不添加市售豆沙，每一口都是綿密豆香。",
+                color: "#a85a5a"
+            },
+            {
+                id: 3,
+                name: "慢熬芋頭牛奶",
+                category: "職人慢磨系列",
+                highlight: "每日限量手工製作",
+                description: "濃郁芋泥與鮮奶的完美比例，質地絲滑如綢。",
+                color: "#9b7ba8"
+            },
+            {
+                id: 4,
+                name: "綜合堅果",
+                category: "職人慢磨系列",
+                highlight: "每日限量手工製作",
+                description: "低溫烘焙多種堅果，口感紮實，是 Gelato 的經典代表。",
+                color: "#b8956a"
+            },
+            {
+                id: 5,
+                name: "法芙娜 70% 巧克力",
+                category: "世界經典巡禮",
+                highlight: "優選頂級食材",
+                description: "使用巧克力界的愛馬仕，純粹苦甜，大人感的頂級享受。",
+                color: "#3d2817"
+            },
+            {
+                id: 6,
+                name: "波本香草",
+                category: "世界經典巡禮",
+                highlight: "優選頂級食材",
+                description: "天然香草籽的優雅芬芳，奶香與果香的完美平衡。",
+                color: "#e8d5c4"
+            },
+            {
+                id: 7,
+                name: "Oreo 旋風",
+                category: "世界經典巡禮",
+                highlight: "優選頂級食材",
+                description: "大人小孩都愛的經典酥脆，豐富的層次感。",
+                color: "#1a1a1a"
+            },
+            {
+                id: 8,
+                name: "白咖啡",
+                category: "茶與咖啡的優雅",
+                highlight: "沉穩的清香",
+                description: "溫潤輕柔的咖啡香氣，提神而不苦澀。",
+                color: "#c9a876"
+            },
+            {
+                id: 9,
+                name: "迎香紅茶",
+                category: "茶與咖啡的優雅",
+                highlight: "沉穩的清香",
+                description: "以純水凝煉成細緻冰晶，口感極致清爽回甘。",
+                color: "#d4a574"
+            },
+            {
+                id: 10,
+                name: "青心烏龍茶",
+                category: "茶與咖啡的優雅",
+                highlight: "沉穩的清香",
+                description: "焙火香氣十足，入口後茶韻在舌尖化開，是夏季裡最解暑的一抹回甘。",
+                color: "#8b7355"
+            },
+            {
+                id: 11,
+                name: "百香果優格",
+                category: "季節酸甜之旅",
+                highlight: "清爽不口渴的首選",
+                description: "熱帶果王與酸甜優格的激盪，極致解膩。",
+                color: "#f4d03f"
+            },
+            {
+                id: 12,
+                name: "草莓",
+                category: "季節酸甜之旅",
+                highlight: "清爽不口渴的首選",
+                description: "滿滿的果實感，鎖住季節最甜美的紅潤。",
+                color: "#e74c3c"
+            }
+        ];
+
+        let currentFilter = "all";
+
+        function renderFlavors() {
+            const grid = document.getElementById("flavorsGrid");
+            grid.innerHTML = "";
+
+            const filtered = currentFilter === "all"
+                ? flavors
+                : flavors.filter(f => f.category === currentFilter);
+
+            filtered.forEach(flavor => {
+                const card = document.createElement("div");
+                card.className = "flavor-card";
+                card.innerHTML = `
+                    <div class="flavor-color" style="background-color: ${flavor.color}"></div>
+                    <div class="flavor-content">
+                        <p class="flavor-category">${flavor.category}</p>
+                        <h4 class="flavor-name">${flavor.name}</h4>
+                        <p class="flavor-highlight">${flavor.highlight}</p>
+                        <p class="flavor-description">${flavor.description}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterFlavors(category) {
+            currentFilter = category;
+            
+            // 更新按鈕狀態
+            document.querySelectorAll(".category-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            event.target.classList.add("active");
+
+            renderFlavors();
+        }
+
+        // 初始化
+        renderFlavors();
+    </script>
+</body>
+</html>
